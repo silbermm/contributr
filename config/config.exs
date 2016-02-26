@@ -19,6 +19,34 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :guardian, Guardian,
+  issuer: "Contributr.#{Mix.env}",
+  ttl: {30, :days},
+  verify_issuer: true,
+  serializer: Contributr.GuardianSerializer,
+  secret_key: to_string(Mix.env),
+  hooks: GuardianDb,
+  permissions: %{
+    default: [
+      :read_profile,
+      :write_profile,
+      :read_token,
+      :revoke_token,
+    ],
+  }
+
+config :ueberauth, Ueberauth,
+  providers: [
+ 		google: {Ueberauth.Strategy.Google, []} 
+	]
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+	client_id: System.get_env("GOOGLE_CLIENT_ID"),
+	client_secret: System.get_env("GOOGLE_CLIENT_SECRET")	
+
+config :guardian_db, GuardianDb,
+	repo: Contribur.Repo
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

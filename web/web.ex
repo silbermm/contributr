@@ -52,6 +52,7 @@ defmodule Contributr.Web do
       import Contributr.Router.Helpers
       import Contributr.ErrorHelpers
       import Contributr.Gettext
+      import FontAwesomePhoenix.HTML
     end
   end
 

@@ -18,8 +18,17 @@ defmodule Contributr.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Contributr, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+     applications: [
+       :phoenix,
+       :phoenix_html,
+       :cowboy,
+       :logger,
+       :gettext,
+       :phoenix_ecto,
+       :postgrex,
+       :ueberauth_google,
+     ]
+   ]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,8 +44,13 @@ defmodule Contributr.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:guardian_db, "0.4.0"},
+     {:guardian, "0.9.0"},
+     {:ueberauth, "~> 0.2"},
+     {:ueberauth_google, "~> 0.2"},
      {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:font_awesome_phoenix, "~> 0.1"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
